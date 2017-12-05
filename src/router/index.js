@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const Login = () => import('@/views/login')
+const Manage = () => import('@/views/Manage')
 
 export default new Router({
   routes: [
@@ -11,6 +12,11 @@ export default new Router({
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/manage',
+      name: 'manage',
+      component: Manage
     }
   ]
 })
