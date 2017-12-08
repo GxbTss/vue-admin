@@ -4,6 +4,21 @@
 
 const path = require('path')
 
+var build = {
+  index:'../deploy/prod/dist/index.html',
+  assetsRoot:'../deploy/prod/dist'
+}
+
+if(process.env.MODE == 'test'){
+  build.index = '../deploy/int/dist/index.html'
+  build.assetsRoot = '../deploy/int/dist'
+}
+
+if(process.env.CHANNEL){
+  build.index = '../deploy/prod/build'+ process.env.CHANNEL +'/dist/index.html'
+  build.assetsRoot = '../deploy/prod/build'+ process.env.CHANNEL +'/dist'
+}
+
 module.exports = {
   dev: {
 
@@ -14,8 +29,8 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 9999, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    port: 8009, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
@@ -50,12 +65,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, build.index),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, build.assetsRoot),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

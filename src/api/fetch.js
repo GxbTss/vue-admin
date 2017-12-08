@@ -1,6 +1,5 @@
 import axios from 'axios'
 import qs from 'qs'
-import { Message } from 'element-ui'
 
 const Axios = axios.create({
   baseURL: '',
@@ -24,11 +23,6 @@ Axios.interceptors.request.use(
     return config
   },
   error => {
-    Message({
-      showClose: true,
-      message: error,
-      type: 'error'
-    })
     return Promise.reject(error)
   }
 )
@@ -47,10 +41,6 @@ Axios.interceptors.response.use(
     return response
   },
   error => {
-    Message({
-      message: error,
-      type: 'error'
-    })
     return Promise.reject(error)
   }
 )
